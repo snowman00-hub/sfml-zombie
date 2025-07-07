@@ -65,7 +65,6 @@ void Zombie::Reset()
 
 void Zombie::Update(float dt)
 {
-	// 거리를 재서 그 거리만큼 가까워지면 멈추게
 	direction = Utils::GetNormal(player->GetPosition() - GetPosition());
 	SetRotation(Utils::Angle(direction));
 	SetPosition(GetPosition() + direction * speed * dt);
