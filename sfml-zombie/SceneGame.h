@@ -8,7 +8,11 @@ class SceneGame : public Scene
 {
 protected:
 	Player* player = nullptr;
+
 	std::list<Zombie*> zombieList;
+	std::list<Zombie*> zombiePool;
+
+	sf::Sprite cursor;
 
 public:
 	SceneGame();
@@ -18,6 +22,7 @@ public:
 	void Enter() override;
 	void Exit() override;
 	void Update(float dt) override;
+	void Draw(sf::RenderWindow& window) override;
 
 	void SpawnZombies(int count);
 };
