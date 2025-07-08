@@ -1,5 +1,6 @@
 #pragma once
 #include "GameObject.h"
+#include "HitBox.h"
 
 class SceneGame;
 
@@ -16,6 +17,8 @@ protected:
 
 	SceneGame* sceneGame = nullptr;
 
+	HitBox hitBox;
+
 public:
 	Player(const std::string& name = "");
 	~Player() override = default;
@@ -31,5 +34,15 @@ public:
 	void Reset() override;
 	void Update(float dt) override;
 	void Draw(sf::RenderWindow& window) override;
+
+	sf::FloatRect GetLocalBounds() const override
+	{
+		return body.getLocalBounds();
+	}
+
+	sf::FloatRect GetGlobalBounds() const override
+	{
+		return body.getGlobalBounds();
+	}
 };
 

@@ -2,42 +2,25 @@
 #include "GameObject.h"
 #include "HitBox.h"
 
-class Player;
+class SceneGame;
 
-class Zombie : public GameObject
+class Bullet : public GameObject
 {
-public:
-	enum class Types
-	{
-		Bloater,
-		Chaser,
-		Crawler
-	};
-
-	static const int TotalTypes = 3;
-
 protected:
-	Types type = Types::Bloater;
-
 	sf::Sprite body;
-	std::string texId;
+	std::string texId = "graphics/bullet.png";
 
 	sf::Vector2f direction;
-
-	int maxHp = 0;
 	float speed = 0.f;
 	int damage = 0;
-	float attackInterval = 0.f;
-
-	int hp;
-
-	Player* player = nullptr;
 
 	HitBox hitBox;
 
+	SceneGame* sceneGame;
+
 public:
-	Zombie(const std::string& name = "");
-	virtual ~Zombie() = default;
+	Bullet(const std::string& name = "");
+	virtual ~Bullet() = default;
 
 	void SetPosition(const sf::Vector2f& pos) override;
 	void SetRotation(float rot) override;
@@ -51,8 +34,6 @@ public:
 	void Update(float dt) override;
 	void Draw(sf::RenderWindow& window) override;
 
-	void SetType(Types type);
-
 	sf::FloatRect GetLocalBounds() const override
 	{
 		return body.getLocalBounds();
@@ -62,5 +43,6 @@ public:
 	{
 		return body.getGlobalBounds();
 	}
-};
 
+	void Fire(const sf::Vector2f& pos, const sf::Vector2f& dir, float s, int d);
+};
